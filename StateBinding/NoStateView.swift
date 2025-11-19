@@ -8,8 +8,20 @@
 import SwiftUI
 
 struct NoStateView: View {
+    var count: Int = 0
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("O valor é \(count)")
+        
+        Button{
+            increment()
+        }label: {
+            Text("Incrementar")
+        }
+    }
+    
+    func increment(){
+        /// Not works
+//        count += 1
     }
 }
 

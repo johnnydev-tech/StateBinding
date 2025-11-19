@@ -8,11 +8,22 @@
 import SwiftUI
 
 struct DetailView: View {
+    @EnvironmentObject var state: CounterStateBinding
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text("O valor recebido foi: \(state.counter)")
+                .font(.largeTitle)
+                .multilineTextAlignment(.center)
+            
+            Button("Aumentar") {
+                state.increment()
+            }
+        }
     }
 }
 
 #Preview {
     DetailView()
+        .environmentObject(CounterStateBinding())
 }
