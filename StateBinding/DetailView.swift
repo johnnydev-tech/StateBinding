@@ -8,22 +8,27 @@
 import SwiftUI
 
 struct DetailView: View {
-    @EnvironmentObject var state: CounterStateBinding
-
+    @Binding var count: Int
+    @Binding var name: String
+    
     var body: some View {
         VStack {
-            Text("O valor recebido foi: \(state.counter)")
+            Text("O valor recebido de \(name.isEmpty ? "-" : name ) foi: \(count)")
                 .font(.largeTitle)
                 .multilineTextAlignment(.center)
             
             Button("Aumentar") {
-                state.increment()
+                count += 1
             }
         }
+        .padding()
     }
 }
 
 #Preview {
-    DetailView()
-        .environmentObject(CounterStateBinding())
+    DetailView(count: .constant(2),
+               name: .constant("Johnny")
+    )
+    
+    //        .environmentObject(CounterStateBinding())
 }
