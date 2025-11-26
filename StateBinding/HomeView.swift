@@ -15,10 +15,11 @@ struct HomeView: View {
     
     // Cria a instancia do State
     //    @StateObject var state = CounterStateBinding()
-    @State var count: Int = 0
-    @State var name: String = ""
-    @State var age: Int = 0
+    @StateObject var controller = ProfileViewController(name: "", age: 0)
     
+    @State var count: Int = 0
+    
+   
     var body: some View {
         NavigationStack{
             Form{
@@ -35,7 +36,7 @@ struct HomeView: View {
                     }
                     NavigationLink{
                         //DetailView().environmentObject(state)
-                        DetailView(count: $count, name: $name)
+                        DetailView(count: $count, name: $controller.name)
                     }label: {
                         Text("Navegar para DetailView")
                     }
@@ -44,7 +45,7 @@ struct HomeView: View {
                 
                 
                 Section("Parte 2 - Desafio"){
-                    FormProfileComponent(name: $name, age: $age)
+                    FormProfileComponent(controller: controller)
                 }
                 
             }

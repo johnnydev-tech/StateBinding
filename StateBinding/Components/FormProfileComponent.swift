@@ -8,14 +8,12 @@
 import SwiftUI
 
 struct FormProfileComponent: View {
-    @Binding var name : String
-    @Binding var age : Int
-    
+    @ObservedObject var controller: ProfileViewController
     
     var body: some View {
-        InputNameComponent(name: $name)
+        InputNameComponent(name: $controller.name)
         
-        Picker("Informe sua idade", selection: $age){
+        Picker("Informe sua idade", selection: $controller.age){
             ForEach(0...99, id: \.self){
                 Text("\($0) anos").tag($0)
             }
@@ -29,7 +27,7 @@ struct FormProfileComponent: View {
         
         NavigationLink(
             destination:
-                ProfileView(name: $name, age: $age)){
+                ProfileView(controller: controller)){
                     Text("Ir para perfil")
                         .foregroundColor(.white)
                         .font(.title3)
@@ -45,5 +43,5 @@ struct FormProfileComponent: View {
 }
 
 #Preview {
-    FormProfileComponent(name: .constant("Johnny"), age: .constant(28))
+    FormProfileComponent(controller: ProfileViewController(name: "Johnny", age: 28))
 }
